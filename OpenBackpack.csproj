@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AssemblyName>industries._5505.tesinormed.OpenBackpack</AssemblyName>
+		<AssemblyTitle>OpenBackpack</AssemblyTitle>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<RootNamespace>industries._5505.tesinormed.OpenBackpack</RootNamespace>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<SteamPath Condition="'$([MSBuild]::IsOSUnixLike())' == 'true'">$(HOME)/.local/share/Steam</SteamPath>
+		<SteamPath Condition="'$([MSBuild]::IsOSUnixLike())' != 'true'">$(MSBuildProgramFiles32)/Steam</SteamPath>
+		<ManagedDir>$(SteamPath)/steamapps/common/PEAK/PEAK_Data/Managed</ManagedDir>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<OutputPath>bin\</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<GenerateDependencyFile>false</GenerateDependencyFile>
+		<PathMap>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))=./</PathMap>
+	</PropertyGroup>
+
+	<Target Name="BuildThunderstore" AfterTargets="PostBuildEvent">
+		<Exec WorkingDirectory="$(ProjectDir)" Command="tcli build --package-version $(Version)"/>
+	</Target>
+
+	<PropertyGroup>
+		<RestoreAdditionalProjectSources>
+			https://nuget.bepinex.dev/v3/index.json;
+			https://nuget.windows10ce.com/nuget/v3/index.json
+		</RestoreAdditionalProjectSources>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BepInEx.Core" Version="5.4.21"/>
+		<PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
+		<PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.3" PrivateAssets="all"/>
+		<PackageReference Include="Hamunii.BepInEx.AutoPlugin" Version="2.0.*" PrivateAssets="all"/>
+		<LocalReferences Include="$(ManagedDir)/*.dll" Exclude="$(ManagedDir)/Mono*.dll;$(ManagedDir)/netstandard.dll;$(ManagedDir)/System*.dll;$(ManagedDir)/mscorlib.dll"/>
+		<Reference Include="@(LocalReferences)" Private="false"/>
+		<Reference Include="$(ManagedDir)/Assembly-CSharp.dll" Private="false" Publicize="true"/>
+		<PackageReference Include="PEAKModding-PEAKLib_Items" Version="1.1.2" Private="False"/>
+	</ItemGroup>
+</Project>

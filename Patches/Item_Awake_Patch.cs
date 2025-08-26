@@ -1,0 +1,26 @@
+﻿using HarmonyLib;
+
+namespace industries._5505.tesinormed.OpenBackpack.Patches;
+
+[HarmonyPatch(typeof(Item), nameof(Item.Awake))]
+public class Item_Awake_Patch
+{
+	public static void Postfix(ref Item __instance)
+	{
+		if (__instance is not Backpack) return;
+
+		// add the open prompt
+		__instance.UIData.mainInteractPrompt = "OPEN";
+		__instance.UIData.hasMainInteract = true;
+
+		// add OnPrimaryStarted
+		var item = __instance;
+		__instance.OnPrimaryStarted += () =>
+		{
+			Plugin.Logger.LogInfo("opening modified backpack wheel");
+			Plugin.IsModifiedBackpackWheel = true;
+			Plugin.WasModifiedBackpackWheel = true;
+			GUIManager.instance.OpenBackpackWheel(BackpackReference.GetFromBackpackItem(item));
+		};
+	}
+}
