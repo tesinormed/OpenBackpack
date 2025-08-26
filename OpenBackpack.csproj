@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<AssemblyName>industries._5505.tesinormed.OpenBackpack</AssemblyName>
 		<AssemblyTitle>OpenBackpack</AssemblyTitle>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -51,6 +51,5 @@
 		<LocalReferences Include="$(ManagedDir)/*.dll" Exclude="$(ManagedDir)/Mono*.dll;$(ManagedDir)/netstandard.dll;$(ManagedDir)/System*.dll;$(ManagedDir)/mscorlib.dll"/>
 		<Reference Include="@(LocalReferences)" Private="false"/>
 		<Reference Include="$(ManagedDir)/Assembly-CSharp.dll" Private="false" Publicize="true"/>
-		<PackageReference Include="PEAKModding-PEAKLib_Items" Version="1.1.2" Private="False"/>
 	</ItemGroup>
 </Project>

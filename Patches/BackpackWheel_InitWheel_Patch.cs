@@ -19,6 +19,7 @@ public class BackpackWheel_InitWheel_Patch
 			{
 				if (backpackWheelSlice.backpack.GetVisuals().TryGetSpawnedItem(backpackWheelSlice.backpackSlot, out var item)) item.Interact(Character.localCharacter);
 				GUIManager.instance.CloseBackpackWheel();
+				Plugin.WasModifiedBackpackWheel = false;
 			});
 		}
 
