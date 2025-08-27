@@ -9,7 +9,7 @@ public class Item_CanUsePrimary_Patch
 	{
 		if (__instance is not Backpack) return;
 
-		// force CanUsePrimary to always return true
+		// always return true
 		__runOriginal = false;
 		__result = true;
 	}

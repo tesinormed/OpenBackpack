@@ -9,7 +9,7 @@ public class BackpackWheel_Choose_Patch
 	{
 		if (!Plugin.IsModifiedBackpackWheel) return;
 
-		// disable original code
+		// skip the original method (the only way to choose is by clicking; see BackpackWheel_InitWheel_Patch)
 		__runOriginal = false;
 	}
 }

@@ -7,10 +7,12 @@ public class GUIManager_CloseBackpackWheel_Patch
 {
 	public static void Postfix(GUIManager __instance)
 	{
-		// reset IsModifiedBackpackWheel to false
+		if (!Plugin.IsModifiedBackpackWheel) return;
+
+		// reset to false
 		Plugin.IsModifiedBackpackWheel = false;
 
-		// remove click listeners from BackpackWheel_InitWheel_Patch
+		// remove the click listeners that were added by BackpackWheel_InitWheel_Patch
 		foreach (var backpackWheelSlice in __instance.backpackWheel.slices) backpackWheelSlice.button.onClick.RemoveAllListeners();
 	}
 }

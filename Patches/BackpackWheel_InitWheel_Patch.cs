@@ -10,20 +10,16 @@ public class BackpackWheel_InitWheel_Patch
 		if (!Plugin.IsModifiedBackpackWheel) return;
 
 		foreach (var backpackWheelSlice in __instance.slices)
-		{
-			// ignore currently held backpack for button interaction
-			backpackWheelSlice.button.interactable = backpackWheelSlice.hasItem;
-
-			// add onClick pickup
+			// when the slice is clicked (and interactable), pickup the item
 			backpackWheelSlice.button.onClick.AddListener(() =>
 			{
+				Plugin.Logger.LogInfo("picking up item from backpack");
 				if (backpackWheelSlice.backpack.GetVisuals().TryGetSpawnedItem(backpackWheelSlice.backpackSlot, out var item)) item.Interact(Character.localCharacter);
+				Plugin.Logger.LogInfo("closing modified backpack wheel");
 				GUIManager.instance.CloseBackpackWheel();
-				Plugin.WasModifiedBackpackWheel = false;
 			});
-		}
 
-		// disable the pickup backpack slice
+		// remove the wear backpack slice
 		__instance.slices[0].gameObject.SetActive(false);
 
 		// disable the currently held item image
