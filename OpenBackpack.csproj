@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<AssemblyName>industries._5505.tesinormed.OpenBackpack</AssemblyName>
 		<AssemblyTitle>OpenBackpack</AssemblyTitle>
-		<Version>1.0.2</Version>
+		<Version>1.0.3</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -49,6 +49,13 @@
 		<PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.3" PrivateAssets="all"/>
 		<PackageReference Include="Hamunii.BepInEx.AutoPlugin" Version="2.0.*" PrivateAssets="all"/>
 		<LocalReferences Include="$(ManagedDir)/*.dll" Exclude="$(ManagedDir)/Mono*.dll;$(ManagedDir)/netstandard.dll;$(ManagedDir)/System*.dll;$(ManagedDir)/mscorlib.dll"/>
+	</ItemGroup>
+
+	<ItemGroup Condition="!Exists('$(ManagedDir)')">
+		<PackageReference Include="UnityEngine.Modules" Version="6000.0.36" PrivateAssets="all"/>
+	</ItemGroup>
+
+	<ItemGroup Condition="Exists('$(ManagedDir)')">
 		<Reference Include="@(LocalReferences)" Private="false"/>
 		<Reference Include="$(ManagedDir)/Assembly-CSharp.dll" Private="false" Publicize="true"/>
 	</ItemGroup>

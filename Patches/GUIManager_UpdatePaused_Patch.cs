@@ -3,14 +3,11 @@
 namespace industries._5505.tesinormed.OpenBackpack.Patches;
 
 [HarmonyPatch(typeof(GUIManager), nameof(GUIManager.UpdatePaused))]
-public class GUIManager_UpdatePaused_Patch
+internal static class GUIManager_UpdatePaused_Patch
 {
 	public static void Prefix(GUIManager __instance, ref bool __runOriginal)
 	{
-		if (!Plugin.IsModifiedBackpackWheel) return;
-
-		// the pause button must be pressed
-		if (!Character.localCharacter.input.pauseWasPressed) return;
+		if (!Character.localCharacter.input.pauseWasPressed || !Plugin.IsModifiedBackpackWheel) return;
 
 		Plugin.Logger.LogInfo("closing modified backpack wheel");
 		__runOriginal = false;

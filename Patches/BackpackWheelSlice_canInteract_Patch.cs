@@ -3,7 +3,7 @@
 namespace industries._5505.tesinormed.OpenBackpack.Patches;
 
 [HarmonyPatch(typeof(BackpackWheelSlice), nameof(BackpackWheelSlice.canInteract), MethodType.Getter)]
-public class BackpackWheelSlice_canInteract_Patch
+internal static class BackpackWheelSlice_canInteract_Patch
 {
 	public static void Prefix(BackpackWheelSlice __instance, ref bool __runOriginal, ref bool __result)
 	{

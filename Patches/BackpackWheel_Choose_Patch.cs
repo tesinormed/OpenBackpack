@@ -3,7 +3,7 @@
 namespace industries._5505.tesinormed.OpenBackpack.Patches;
 
 [HarmonyPatch(typeof(BackpackWheel), nameof(BackpackWheel.Choose))]
-public class BackpackWheel_Choose_Patch
+internal static class BackpackWheel_Choose_Patch
 {
 	public static void Prefix(ref bool __runOriginal)
 	{

@@ -14,14 +14,16 @@ public partial class Plugin : BaseUnityPlugin
 
 	private void Awake()
 	{
-		Logger = base.Logger;
-		_harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), Id);
+		Logger ??= base.Logger;
+		_harmony ??= new Harmony(Id);
+		IsModifiedBackpackWheel = false;
+
+		_harmony.PatchAll(Assembly.GetExecutingAssembly());
 	}
 
 	// for https://github.com/Hamunii/AutoReload
 	private void OnDestroy()
 	{
 		_harmony.UnpatchSelf();
-		IsModifiedBackpackWheel = false;
 	}
 }

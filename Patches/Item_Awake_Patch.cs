@@ -3,9 +3,9 @@
 namespace industries._5505.tesinormed.OpenBackpack.Patches;
 
 [HarmonyPatch(typeof(Item), nameof(Item.Awake))]
-public class Item_Awake_Patch
+internal static class Item_Awake_Patch
 {
-	public static void Postfix(ref Item __instance)
+	public static void Postfix(Item __instance)
 	{
 		if (__instance is not Backpack) return;
 

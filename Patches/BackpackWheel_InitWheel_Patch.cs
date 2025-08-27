@@ -3,9 +3,9 @@
 namespace industries._5505.tesinormed.OpenBackpack.Patches;
 
 [HarmonyPatch(typeof(BackpackWheel), nameof(BackpackWheel.InitWheel))]
-public class BackpackWheel_InitWheel_Patch
+internal static class BackpackWheel_InitWheel_Patch
 {
-	public static void Postfix(ref BackpackWheel __instance)
+	public static void Postfix(BackpackWheel __instance)
 	{
 		if (!Plugin.IsModifiedBackpackWheel) return;
 
